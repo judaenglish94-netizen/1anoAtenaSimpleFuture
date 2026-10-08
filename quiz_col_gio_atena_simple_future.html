@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz de Inglês - Simple Future | Colégio Atena</title>
+  <!-- Google Fonts: Poppins for clean UI and Caveat for Atena handwriting style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <script>
+    function exibirLogoBackup() {
+      const img = document.getElementById('logo-img');
+      const backup = document.getElementById('logo-backup');
+      if (img) img.style.display = 'none';
+      if (backup) backup.classList.remove('escondido');
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-principal: #317CB8;
+      --card-bg: #FFFFFF;
+      --texto-escuro: #1A202C;
+      --texto-suave: #4A5568;
+      --detalhe-azul-escuro: #0F385D;
+      --detalhe-azul-hover: #0A2640;
+      --cor-sucesso: #28A745;
+      --cor-erro: #DC3545;
+      --cor-alerta: #D97706;
+      --cinza-claro: #F8FAFC;
+      --cinza-borda: #E2E8F0;
+      --sombra-card: 0 20px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-principal);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      color: var(--texto-escuro);
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 820px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* LOGO & CABEÇALHO ATENA */
+    .logo-container {
+      margin-bottom: 12px;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo-box {
+      width: 280px;
+      max-width: 85%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-box img {
+      width: 100%;
+      height: auto;
+      max-height: 95px;
+      object-fit: contain;
+      filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.15));
+    }
+
+    .logo-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+    }
+
+    .logo-colegio {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: -8px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .logo-atena {
+      font-family: 'Caveat', cursive;
+      font-size: 4.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 0.9;
+      transform: rotate(-3deg);
+      text-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    }
+
+    .header-title {
+      color: #FFFFFF;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header-subtitle {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* CARD CENTRAL E SCROLLBAR */
+    .card-content {
+      background-color: var(--card-bg);
+      width: 100%;
+      border-radius: 22px;
+      padding: 28px 24px;
+      box-shadow: var(--sombra-card);
+      max-height: 76vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    @media (max-width: 640px) {
+      .card-content {
+        padding: 20px 16px;
+        max-height: 80vh;
+      }
+    }
+
+    .card-content::-webkit-scrollbar {
+      width: 8px;
+    }
+    .card-content::-webkit-scrollbar-track {
+      background: #F0F4F8;
+      border-radius: 10px;
+    }
+    .card-content::-webkit-scrollbar-thumb {
+      background: var(--detalhe-azul-escuro);
+      border-radius: 10px;
+    }
+    .card-content::-webkit-scrollbar-thumb:hover {
+      background: var(--detalhe-azul-hover);
+    }
+
+    .summary-section {
+      background-color: var(--cinza-claro);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid var(--cinza-borda);
+      margin-bottom: 22px;
+    }
+
+    .summary-title {
+      color: var(--detalhe-azul-escuro);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .rule-card {
+      background-color: #FFFFFF;
+      border-left: 5px solid var(--detalhe-azul-escuro);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    .rule-card.going-to {
+      border-left-color: #1D639D;
+    }
+
+    .rule-card h3 {
+      font-size: 1.05rem;
+      color: var(--detalhe-azul-escuro);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rule-card p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--texto-suave);
+      margin-bottom: 8px;
+    }
+
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+    }
+
+    .kw-tag {
+      background-color: #E2E8F0;
+      color: var(--detalhe-azul-escuro);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .example-list {
+      margin-top: 6px;
+      padding-left: 18px;
+      font-size: 0.88rem;
+      color: var(--texto-escuro);
+    }
+
+    .example-list li {
+      margin-bottom: 4px;
+    }
+
+    .translation {
+      color: #64748B;
+      font-style: italic;
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 0.85rem;
+    }
+
+    .comp-table th, .comp-table td {
+      border: 1px solid var(--cinza-borda);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .comp-table th {
+      background-color: var(--detalhe-azul-escuro);
+      color: #FFFFFF;
+    }
+
+    .top-quiz-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--cinza-claro);
+    }
+
+    .badge-q {
+      background-color: var(--detalhe-azul-escuro);
+      color: #FFFFFF;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .btn-drawer-trigger {
+      background-color: #EDF2F7;
+      color: var(--detalhe-azul-escuro);
+      border: 1px solid var(--cinza-borda);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-drawer-trigger:hover {
+      background-color: #E2E8F0;
+    }
+
+    .question-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--detalhe-azul-escuro);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .opt-btn {
+      background-color: #F8FAFC;
+      border: 2px solid var(--cinza-borda);
+      border-radius: 12px;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.92rem;
+      color: var(--texto-escuro);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--detalhe-azul-escuro);
+      background-color: #F0F4F8;
+    }
+
+    .opt-btn.selected {
+      border-color: var(--detalhe-azul-escuro);
+      background-color: #E2E8F0;
+      font-weight: 600;
+    }
+
+    .opt-btn.correct {
+      border-color: var(--cor-sucesso) !important;
+      background-color: #E6F4EA !important;
+      color: #137333 !important;
+      font-weight: 600;
+    }
+
+    .opt-btn.wrong {
+      border-color: var(--cor-erro) !important;
+      background-color: #FCE8E6 !important;
+      color: #C5221F !important;
+      font-weight: 600;
+    }
+
+    .opt-btn:disabled {
+      cursor: default;
+    }
+
+    .opt-letter {
+      background-color: var(--cinza-borda);
+      color: var(--detalhe-azul-escuro);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* UNSCRAMBLE / WORD BLOCKS */
+    .unscramble-container {
+      margin-bottom: 20px;
+    }
+
+    .word-pool-label {
+      font-size: 0.82rem;
+      color: var(--texto-suave);
+      margin-bottom: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .target-zone {
+      min-height: 60px;
+      background-color: #F1F5F9;
+      border: 2px dashed #CBD5E1;
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .word-pool {
+      min-height: 50px;
+      background-color: #F8FAFC;
+      border: 1px solid var(--cinza-borda);
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .word-block {
+      background-color: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+      color: var(--detalhe-azul-escuro);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .word-block:hover {
+      background-color: var(--detalhe-azul-escuro);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    .word-block.used {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* FEEDBACK CARD */
+    .feedback-box {
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .feedback-box.correct {
+      background-color: #E6F4EA;
+      border-left: 5px solid var(--cor-sucesso);
+      color: #137333;
+    }
+
+    .feedback-box.wrong {
+      background-color: #FCE8E6;
+      border-left: 5px solid var(--cor-erro);
+      color: #C5221F;
+    }
+
+    /* CONTROLES DE NAVEGAÇÃO DO QUIZ */
+    .quiz-nav-btns {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-secondary {
+      background-color: #E2E8F0;
+      color: var(--detalhe-azul-escuro);
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background-color: #CBD5E1;
+    }
+
+    .btn-secondary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background-color: var(--detalhe-azul-escuro);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(15, 56, 93, 0.2);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--detalhe-azul-hover);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-confirm {
+      background-color: var(--cor-sucesso);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(40, 167, 69, 0.25);
+    }
+
+    .btn-confirm:hover {
+      background-color: #218838;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      display: flex;
+      justify-content: flex-end;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-content {
+      background-color: #FFFFFF;
+      width: 320px;
+      max-width: 85%;
+      height: 100%;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.25);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .drawer-overlay.open .drawer-content {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--cinza-borda);
+    }
+
+    .drawer-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--detalhe-azul-escuro);
+    }
+
+    .btn-close-drawer {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--texto-suave);
+    }
+
+    .q-grid-map {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .q-map-btn {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      border: 1px solid var(--cinza-borda);
+      background-color: #F8FAFC;
+      color: var(--texto-escuro);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .q-map-btn:hover {
+      border-color: var(--detalhe-azul-escuro);
+    }
+
+    .q-map-btn.current {
+      outline: 2px solid var(--detalhe-azul-escuro);
+      font-weight: 700;
+    }
+
+    .q-map-btn.status-correct {
+      background-color: #28A745;
+      color: #FFFFFF;
+      border-color: #28A745;
+    }
+
+    .q-map-btn.status-wrong {
+      background-color: #DC3545;
+      color: #FFFFFF;
+      border-color: #DC3545;
+    }
+
+    /* TELA DE RESULTADO FINAL */
+    .result-section {
+      text-align: center;
+    }
+
+    .score-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: conic-gradient(var(--detalhe-azul-escuro) 0%, #E2E8F0 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 16px auto;
+      position: relative;
+    }
+
+    .score-inner {
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      background-color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-percent {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--detalhe-azul-escuro);
+      line-height: 1;
+    }
+
+    .score-fraction {
+      font-size: 0.8rem;
+      color: var(--texto-suave);
+      margin-top: 2px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 580px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background-color: var(--cinza-claro);
+      border: 1px solid var(--cinza-borda);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-card h4 {
+      font-size: 0.78rem;
+      color: var(--texto-suave);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .stat-card p {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--detalhe-azul-escuro);
+    }
+
+    .diag-box {
+      background-color: #F8FAFC;
+      border: 1px solid #CBD5E1;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: left;
+      margin-bottom: 22px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .diag-box h3 {
+      color: var(--detalhe-azul-escuro);
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .diag-box ul {
+      margin-left: 18px;
+    }
+
+    .escondido {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- HEADER LOGO ATENA -->
+    <div class="logo-container">
+      <div class="logo-box">
+        <img id="logo-img" src="imageatena_2.png" alt="Colégio Atena" onerror="exibirLogoBackup()">
+        <div id="logo-backup" class="logo-fallback escondido">
+          <span class="logo-colegio">COLÉGIO</span>
+          <span class="logo-atena">Atena</span>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="header-title">English Quiz: Simple Future</h1>
+    <p class="header-subtitle">1ª Série do Ensino Médio • Colégio Atena</p>
+
+    <!-- CARD PRINCIPAL BRANCO -->
+    <div class="card-content">
+      
+      <div id="tela-inicio">
+        <div class="summary-section">
+          <h2 class="summary-title">Resumo Teórico: Simple Future</h2>
+          <p style="font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 16px; text-align: center;">
+            Em inglês, existem duas formas principais para expressar ações no futuro: <strong>WILL</strong> e <strong>BE GOING TO</strong>. Leia a explicação abaixo antes de começar!
+          </p>
+
+          <!-- CARTÃO WILL -->
+          <div class="rule-card">
+            <h3>1. WILL (Futuro Simples / Decisões e Previsões Pessoais)</h3>
+            <p>Usamos o <strong>WILL</strong> para:</p>
+            <ul style="margin-left: 18px; font-size: 0.88rem; color: var(--texto-suave); margin-bottom: 8px;">
+              <li><strong>Decisões espontâneas:</strong> Tomadas no exato momento da fala.</li>
+              <li><strong>Previsões sem evidência presente:</strong> Opiniões, palpites, incertezas ou crenças pessoais.</li>
+              <li><strong>Promessas, ofertas e pedidos.</strong></li>
+            </ul>
+            <p style="font-size: 0.85rem; font-weight: 600;">Palavras-chave e Expressões Indicadoras:</p>
+            <div class="keywords">
+              <span class="kw-tag">Maybe (Talvez)</span>
+              <span class="kw-tag">I think (Eu acho)</span>
+              <span class="kw-tag">I'm sure (Tenho certeza)</span>
+              <span class="kw-tag">Probably (Provavelmente)</span>
+              <span class="kw-tag">I promise (Eu prometo)</span>
+            </div>
+            <ul class="example-list">
+              <li><strong>I think it will rain tomorrow.</strong> <span class="translation">(Eu acho que vai chover amanhã - opinião)</span></li>
+              <li><strong>Maybe I will buy that jacket.</strong> <span class="translation">(Talvez eu vá comprar aquela jaqueta - incerteza)</span></li>
+              <li><strong>I promise I will help you with your homework.</strong> <span class="translation">(Eu prometo que te ajudarei - promessa)</span></li>
+            </ul>
+          </div>
+
+          <!-- CARTÃO BE GOING TO -->
+          <div class="rule-card going-to">
+            <h3>2. BE GOING TO (Futuro com Planos e Evidências)</h3>
+            <p>Usamos o <strong>BE GOING TO</strong> (am / is / are + going to + verbo) para:</p>
+            <ul style="margin-left: 18px; font-size: 0.88rem; color: var(--texto-suave); margin-bottom: 8px;">
+              <li><strong>Planos e intenções prévias:</strong> Decisões que já foram tomadas antes do momento da fala.</li>
+              <li><strong>Previsões com evidência visual/física:</strong> Quando algo no presente indica claramente o que vai acontecer.</li>
+            </ul>
+            <p style="font-size: 0.85rem; font-weight: 600;">Palavras-chave e Expressões Indicadoras:</p>
+            <div class="keywords">
+              <span class="kw-tag">Look at! (Olhe para!)</span>
+              <span class="kw-tag">Already decided (Já decidido)</span>
+              <span class="kw-tag">Plan to (Planejar)</span>
+              <span class="kw-tag">Evidence (Evidência visível)</span>
+            </div>
+            <ul class="example-list">
+              <li><strong>Look at those dark clouds! It is going to rain.</strong> <span class="translation">(Olhe para aquelas nuvens escuras! Vai chover - evidência visual)</span></li>
+              <li><strong>She is going to study Medicine next year.</strong> <span class="translation">(Ela vai estudar Medicina no ano que vem - plano/intenção)</span></li>
+            </ul>
+          </div>
+
+          <!-- QUADRO COMPARATIVO -->
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Estrutura</th>
+                <th>Uso Principal</th>
+                <th>Dica de Identificação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>WILL</strong> + Verbo</td>
+                <td>Decisão rápida, opinião, palpite, promessa</td>
+                <td>Geralmente acompanhado de <em>maybe, I think, I'm sure, probably</em></td>
+              </tr>
+              <tr>
+                <td><strong>AM/IS/ARE GOING TO</strong> + Verbo</td>
+                <td>Plano prévio, intenção ou evidência visível</td>
+                <td>Geralmente acompanhado de <em>look at, already, plan, intend</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button class="btn-primary" style="width: 100%; padding: 16px; font-size: 1.05rem;" onclick="iniciarQuiz()">Start Quiz!</button>
+      </div>
+
+      <div id="tela-quiz" class="escondido">
+        <div class="top-quiz-bar">
+          <span class="badge-q" id="indicador-questao">Question 1 of 30</span>
+          <button class="btn-drawer-trigger" onclick="abrirDrawer()">
+            <span>🧭 Question Map</span>
+          </button>
+        </div>
+
+        <div class="question-title" id="texto-pergunta">Carregando pergunta...</div>
+
+        <!-- CONTAINER PARA MÚLTIPLA ESCOLHA (Questões 1 a 12) -->
+        <div id="container-multipla" class="options-grid">
+          <!-- Gerado via JavaScript -->
+        </div>
+
+        <!-- CONTAINER PARA DESEMBARALHAR (Questões 13 a 30) -->
+        <div id="container-unscramble" class="unscramble-container escondido">
+          <div class="word-pool-label">Sua resposta em ordem:</div>
+          <div class="target-zone" id="target-zone">
+            <!-- Palavras selecionadas entram aqui -->
+          </div>
+
+          <div class="word-pool-label">Toque nas palavras para montar a frase:</div>
+          <div class="word-pool" id="word-pool">
+            <!-- Blocos de palavras embaralhadas -->
+          </div>
+        </div>
+
+        <!-- CAIXA DE FEEDBACK E JUSTIFICATIVA -->
+        <div id="feedback-card" class="feedback-box escondido">
+          <div id="feedback-status" style="font-weight: 700; margin-bottom: 4px;"></div>
+          <div id="feedback-texto"></div>
+        </div>
+
+        <!-- BARRA DE NAVEGAÇÃO -->
+        <div class="quiz-nav-btns">
+          <button class="btn-secondary" id="btn-prev" onclick="navegarQuestao(-1)">Previous</button>
+          <button class="btn-confirm" id="btn-confirm" onclick="confirmarResposta()">Confirm Answer</button>
+          <button class="btn-primary" id="btn-next" onclick="navegarQuestao(1)">Next</button>
+        </div>
+      </div>
+
+      <div id="tela-resultado" class="escondido">
+        <div class="result-section">
+          <h2 class="summary-title" style="font-size: 1.5rem;">Quiz Completed!</h2>
+          <p style="color: var(--texto-suave); font-size: 0.95rem;">Confira seu desempenho detalhado na avaliação de Inglês:</p>
+
+          <div class="score-circle" id="score-circle">
+            <div class="score-inner">
+              <span class="score-percent" id="score-percent">0%</span>
+              <span class="score-fraction" id="score-fraction">0 de 30</span>
+            </div>
+          </div>
+
+          <!-- ESTATÍSTICAS POR SEÇÃO -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <h4>Multiple Choice</h4>
+              <p id="stat-multipla">0/12</p>
+            </div>
+            <div class="stat-card">
+              <h4>Unscramble (Will)</h4>
+              <p id="stat-will">0/9</p>
+            </div>
+            <div class="stat-card">
+              <h4>Unscramble (Going to)</h4>
+              <p id="stat-goingto">0/9</p>
+            </div>
+          </div>
+
+          <!-- DIAGNÓSTICO E RECOMENDAÇÕES PEDAGÓGICAS -->
+          <div class="diag-box">
+            <h3>Diagnóstico e Recomendações de Estudo:</h3>
+            <div id="diagnostico-conteudo">
+              <!-- Gerado dinamicamente com base nas fragilidades -->
+            </div>
+          </div>
+
+          <button class="btn-primary" style="width: 100%; padding: 15px;" onclick="reiniciarQuiz()">Refazer Quiz</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MENU LATERAL / DRAWER DE NAVEGAÇÃO DIRETA (QUESTION MAP) -->
+  <div class="drawer-overlay" id="drawer-map">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <span class="drawer-title">Question Map (1 - 30)</span>
+        <button class="btn-close-drawer" onclick="fecharDrawer()">&times;</button>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--texto-suave); margin-bottom: 12px;">
+        Navegue diretamente para qualquer questão:
+      </div>
+      <div class="q-grid-map" id="q-grid-map">
+        <!-- 30 Botões gerados via JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function exibirLogoBackup() {
+      document.getElementById('logo-img').style.display = 'none';
+      document.getElementById('logo-backup').classList.remove('escondido');
+    }
+
+    // BANCO DE DADOS DE 30 QUESTÕES COMPLETO E DIVERSIFICADO
+    const questoes = [
+      // --- QUESTÕES 1 A 12: MÚLTIPLA ESCOLHA (WILL vs BE GOING TO) ---
+      {
+        id: 1,
+        tipo: 'multipla',
+        pergunta: "1. 'I think it __________ rain later today. Take an umbrella just in case.'",
+        opcoes: ["will", "is going to", "are going to", "going to", "will going to"],
+        correta: 0,
+        justificativa: "Usamos <strong>WILL</strong> porque a palavra-chave <em>'I think'</em> indica uma opinião/palpite pessoal sem evidência visual concreta."
+      },
+      {
+        id: 2,
+        tipo: 'multipla',
+        pergunta: "2. 'Look at those dark black clouds in the sky! It __________ rain soon.'",
+        opcoes: ["will", "is going to", "are going to", "will be going to", "is going"],
+        correta: 1,
+        justificativa: "Usamos <strong>IS GOING TO</strong> porque a expressão <em>'Look at those dark black clouds'</em> traz uma evidência física visível no momento da fala."
+      },
+      {
+        id: 3,
+        tipo: 'multipla',
+        pergunta: "3. 'Maybe I __________ visit my grandparents this weekend, but I haven't decided yet.'",
+        opcoes: ["am going to", "is going to", "will", "will going to", "are going to"],
+        correta: 2,
+        justificativa: "Usamos <strong>WILL</strong> porque a palavra <em>'Maybe'</em> (talvez) indica incerteza e indecisão."
+      },
+      {
+        id: 4,
+        tipo: 'multipla',
+        pergunta: "4. 'They __________ buy a new house next month. They have already saved all the money and signed the contract.'",
+        opcoes: ["will", "are going to", "is going to", "will going to", "going to"],
+        correta: 1,
+        justificativa: "Usamos <strong>ARE GOING TO</strong> porque há um plano e preparação prévia já decidida e agendada."
+      },
+      {
+        id: 5,
+        tipo: 'multipla',
+        pergunta: "5. 'I'm sure you __________ pass the English exam if you study hard.'",
+        opcoes: ["are going to", "will", "is going to", "going to", "will to"],
+        correta: 1,
+        justificativa: "Usamos <strong>WILL</strong> acompanhado da expressão <em>'I'm sure'</em> para fazer uma previsão sobre o futuro baseada na convicção do falante."
+      },
+      {
+        id: 6,
+        tipo: 'multipla',
+        pergunta: "6. 'Watch out! That ladder __________ fall!'",
+        opcoes: ["will", "will fall", "is going to", "are going to", "is going"],
+        correta: 2,
+        justificativa: "Usamos <strong>IS GOING TO</strong> para situações eminentes com evidência imediata (a escada está caindo agora!)."
+      },
+      {
+        id: 7,
+        tipo: 'multipla',
+        pergunta: "7. 'The phone is ringing!' - 'Don't worry, I __________ answer it.'",
+        opcoes: ["am going to", "is going to", "will", "will going to", "going to"],
+        correta: 2,
+        justificativa: "Usamos <strong>WILL</strong> para uma decisão rápida e espontânea tomada no exato momento da conversa."
+      },
+      {
+        id: 8,
+        tipo: 'multipla',
+        pergunta: "8. 'She __________ study Medicine at university next semester. It's her dream and plan.'",
+        opcoes: ["will", "is going to", "are going to", "will going to", "going to"],
+        correta: 1,
+        justificativa: "Usamos <strong>IS GOING TO</strong> para expressar uma intenção ou plano de vida pré-definido."
+      },
+      {
+        id: 9,
+        tipo: 'multipla',
+        pergunta: "9. 'I promise I __________ forget your birthday this time.'",
+        opcoes: ["won't", "am not going to", "not will", "isn't going to", "don't going to"],
+        correta: 0,
+        justificativa: "Usamos <strong>WON'T</strong> (will + not) para expressar uma promessa."
+      },
+      {
+        id: 10,
+        tipo: 'multipla',
+        pergunta: "10. 'We __________ have a party next Saturday. We already sent the invitations.'",
+        opcoes: ["will", "is going to", "are going to", "will be going to", "going to"],
+        correta: 2,
+        justificativa: "Usamos <strong>ARE GOING TO</strong> porque os convites já foram enviados (evento planejado)."
+      },
+      {
+        id: 11,
+        tipo: 'multipla',
+        pergunta: "11. 'I think robots __________ do all the housework in 2050.'",
+        opcoes: ["are going to", "will", "is going to", "going to", "will going to"],
+        correta: 1,
+        justificativa: "Usamos <strong>WILL</strong> para previsões sobre um futuro distante baseadas em opiniões (<em>'I think'</em>)."
+      },
+      {
+        id: 12,
+        tipo: 'multipla',
+        pergunta: "12. 'Look at that runner! He is way ahead of everyone. He __________ win the race.'",
+        opcoes: ["will", "is going to", "are going to", "will win", "going to win"],
+        correta: 1,
+        justificativa: "Usamos <strong>IS GOING TO</strong> devido à evidência visível durante a corrida."
+      },
+
+      // --- QUESTÕES 13 A 21: DESEMBARALHAR (WILL) ---
+      {
+        id: 13,
+        tipo: 'unscramble_will',
+        pergunta: "13. Desembaralhe a frase com WILL:",
+        palavrasEmbaralhadas: ["will", "I", "you", "call", "tonight", "."],
+        respostaCorreta: "I will call you tonight .",
+        justificativa: "Ordem padrão do Simple Future com WILL: Sujeito (I) + Auxiliar (will) + Verbo Principal (call) + Objeto (you) + Advérbio (tonight)."
+      },
+      {
+        id: 14,
+        tipo: 'unscramble_will',
+        pergunta: "14. Desembaralhe a frase com WILL:",
+        palavrasEmbaralhadas: ["think", "They", "win", "will", "the", "game", "."],
+        respostaCorreta: "They think will win the game .", // alterado abaixo
+        respostaCorretaRef: ["They", "think", "the", "team", "will", "win", "."],
+        palavrasEmbaralhadas: ["think", "She", "will", "pass", "the", "exam", "."],
+        respostaCorreta: "She think will pass the exam .",
+        palavrasFixed: {
+          embaralhadas: ["will", "She", "pass", "the", "exam", "probably", "."],
+          correta: "She will probably pass the exam ."
+        },
+        justificativa: "Estrutura correta: Sujeito (She) + Auxiliar (will) + Advérbio (probably) + Verbo (pass) + Complemento (the exam)."
+      },
+      {
+        id: 15,
+        tipo: 'unscramble_will',
+        pergunta: "15. Desembaralhe a frase de previsão com WILL:",
+        palavrasFixed: {
+          embaralhadas: ["rain", "It", "will", "tomorrow", "maybe", "."],
+          correta: "Maybe it will rain tomorrow ."
+        },
+        justificativa: "A palavra 'Maybe' geralmente inicia a frase, seguida de: Sujeito (it) + will + verbo (rain) + advérbio (tomorrow)."
+      },
+      {
+        id: 16,
+        tipo: 'unscramble_will',
+        pergunta: "16. Desembaralhe a promessa com WILL:",
+        palavrasFixed: {
+          embaralhadas: ["promise", "I", "help", "will", "you", "."],
+          correta: "I promise I will help you ."
+        },
+        justificativa: "Estrutura: Oração principal (I promise) + Oração com futuro (I will help you)."
+      },
+      {
+        id: 17,
+        tipo: 'unscramble_will',
+        pergunta: "17. Desembaralhe a decisão rápida com WILL:",
+        palavrasFixed: {
+          embaralhadas: ["will", "a", "buy", "sandwich", "I", "."],
+          correta: "I will buy a sandwich ."
+        },
+        justificativa: "Estrutura: Sujeito (I) + will + verbo (buy) + complemento (a sandwich)."
+      },
+      {
+        id: 18,
+        tipo: 'unscramble_will',
+        pergunta: "18. Desembaralhe a frase negativa com WILL (WON'T):",
+        palavrasFixed: {
+          embaralhadas: ["won't", "He", "tell", "anyone", "your", "secret", "."],
+          correta: "He won't tell anyone your secret ."
+        },
+        justificativa: "Estrutura negativa: Sujeito (He) + Auxiliar Negativo (won't) + Verbo (tell) + Complemento."
+      },
+      {
+        id: 19,
+        tipo: 'unscramble_will',
+        pergunta: "19. Desembaralhe a frase interrogativa com WILL:",
+        palavrasFixed: {
+          embaralhadas: ["Will", "come", "you", "to", "my", "party", "?"],
+          correta: "Will you come to my party ?"
+        },
+        justificativa: "Estrutura interrogativa: Auxiliar (Will) + Sujeito (you) + Verbo (come) + Complemento + ?"
+      },
+      {
+        id: 20,
+        tipo: 'unscramble_will',
+        pergunta: "20. Desembaralhe a frase com WILL:",
+        palavrasFixed: {
+          embaralhadas: ["sure", "am", "I", "will", "succeed", "you", "."],
+          correta: "I am sure you will succeed ."
+        },
+        justificativa: "Estrutura: 'I am sure' + Sujeito (you) + will + verbo (succeed)."
+      },
+      {
+        id: 21,
+        tipo: 'unscramble_will',
+        pergunta: "21. Desembaralhe a frase com WILL:",
+        palavrasFixed: {
+          embaralhadas: ["never", "I", "forget", "will", "this", "day", "."],
+          correta: "I will never forget this day ."
+        },
+        justificativa: "Advérbios de frequência como 'never' ficam situados entre 'will' e o verbo principal (forget)."
+      },
+
+      // --- QUESTÕES 22 A 30: DESEMBARALHAR (BE GOING TO) ---
+      {
+        id: 22,
+        tipo: 'unscramble_goingto',
+        pergunta: "22. Desembaralhe o plano futuro com BE GOING TO:",
+        palavrasFixed: {
+          embaralhadas: ["am", "going", "I", "to", "study", "tonight", "."],
+          correta: "I am going to study tonight ."
+        },
+        justificativa: "Estrutura: Sujeito (I) + am + going to + verbo principal (study) + complemento (tonight)."
+      },
+      {
+        id: 23,
+        tipo: 'unscramble_goingto',
+        pergunta: "23. Desembaralhe a frase com BE GOING TO:",
+        palavrasFixed: {
+          embaralhadas: ["is", "She", "going", "to", "travel", "to", "Spain", "."],
+          correta: "She is going to travel to Spain ."
+        },
+        justificativa: "Estrutura: Sujeito (She) + is + going to + verbo (travel) + destino."
+      },
+      {
+        id: 24,
+        tipo: 'unscramble_goingto',
+        pergunta: "24. Desembaralhe a frase no plural com BE GOING TO:",
+        palavrasFixed: {
+          embaralhadas: ["are", "They", "going", "to", "buy", "a", "car", "."],
+          correta: "They are going to buy a car ."
+        },
+        justificativa: "Estrutura com plural: Sujeito (They) + are + going to + verbo (buy) + complemento."
+      },
+      {
+        id: 25,
+        tipo: 'unscramble_goingto',
+        pergunta: "25. Desembaralhe a previsão com evidência:",
+        palavrasFixed: {
+          embaralhadas: ["It", "is", "going", "to", "rain", "heavy", "."],
+          correta: "It is going to rain heavy ."
+        },
+        justificativa: "Estrutura: Sujeito (It) + is + going to + verbo (rain) + advérbio."
+      },
+      {
+        id: 26,
+        tipo: 'unscramble_goingto',
+        pergunta: "26. Desembaralhe a frase negativa com BE GOING TO:",
+        palavrasFixed: {
+          embaralhadas: ["He", "is", "not", "going", "to", "watch", "TV", "."],
+          correta: "He is not going to watch TV ."
+        },
+        justificativa: "Negativa com going to: Sujeito (He) + is + not + going to + verbo (watch) + complemento."
+      },
+      {
+        id: 27,
+        tipo: 'unscramble_goingto',
+        pergunta: "27. Desembaralhe a pergunta com BE GOING TO:",
+        palavrasFixed: {
+          embaralhadas: ["Are", "you", "going", "to", "cook", "dinner", "?"],
+          correta: "Are you going to cook dinner ?"
+        },
+        justificativa: "Interrogativa: Verbo Be (Are) + Sujeito (you) + going to + verbo (cook) + complemento + ?"
+      },
+      {
+        id: 28,
+        tipo: 'unscramble_goingto',
+        pergunta: "28. Desembaralhe a frase com BE GOING TO:",
+        palavrasFixed: {
+          embaralhadas: ["We", "are", "going", "to", "play", "soccer", "."],
+          correta: "We are going to play soccer ."
+        },
+        justificativa: "Estrutura: Sujeito (We) + are + going to + verbo (play) + complemento (soccer)."
+      },
+      {
+        id: 29,
+        tipo: 'unscramble_goingto',
+        pergunta: "29. Desembaralhe a frase com BE GOING TO:",
+        palavrasFixed: {
+          embaralhadas: ["going", "Look", "!", "He", "is", "to", "fall", "."],
+          correta: "Look ! He is going to fall ."
+        },
+        justificativa: "Alerta de evidência visível: 'Look !' + Sujeito (He) + is + going to + verbo (fall)."
+      },
+      {
+        id: 30,
+        tipo: 'unscramble_goingto',
+        pergunta: "30. Desembaralhe a frase com BE GOING TO:",
+        palavrasFixed: {
+          embaralhadas: ["is", "going", "The", "teacher", "to", "explain", "."],
+          correta: "The teacher is going to explain ."
+        },
+        justificativa: "Estrutura: Sujeito (The teacher) + verb Be (is) + going to + verbo principal (explain)."
+      }
+    ];
+
+    let questaoAtualIndex = 0;
+    let respostasUsuario = new Array(questoes.length).fill(null); // armazena estado de cada questão
+    let palavrasSelecionadas = []; // temporário para questões unscramble
+
+    function iniciarQuiz() {
+      document.getElementById('tela-inicio').classList.add('escondido');
+      document.getElementById('tela-quiz').classList.remove('escondido');
+      document.getElementById('tela-resultado').classList.add('escondido');
+      
+      questaoAtualIndex = 0;
+      gerarGridDrawer();
+      carregarQuestao();
+    }
+
+    function carregarQuestao() {
+      const q = questoes[questaoAtualIndex];
+      palavrasSelecionadas = [];
+
+      // Atualiza Topo
+      document.getElementById('indicador-questao').innerText = `Question ${questaoAtualIndex + 1} of 30`;
+      
+      // Atualiza Pergunta
+      if (q.tipo === 'multipla') {
+        document.getElementById('texto-pergunta').innerText = q.pergunta;
+      } else {
+        document.getElementById('texto-pergunta').innerText = q.pergunta;
+      }
+
+      // Alterna Containers
+      const containerMultipla = document.getElementById('container-multipla');
+      const containerUnscramble = document.getElementById('container-unscramble');
+      const feedbackCard = document.getElementById('feedback-card');
+
+      feedbackCard.classList.add('escondido');
+
+      if (q.tipo === 'multipla') {
+        containerMultipla.classList.remove('escondido');
+        containerUnscramble.classList.add('escondido');
+        renderizarMultiplaEscolha(q);
+      } else {
+        containerMultipla.classList.add('escondido');
+        containerUnscramble.classList.remove('escondido');
+        renderizarUnscramble(q);
+      }
+
+      // Atualizar estado dos botões de navegação
+      document.getElementById('btn-prev').disabled = questaoAtualIndex === 0;
+      
+      const estadoSalvo = respostasUsuario[questaoAtualIndex];
+      const btnConfirm = document.getElementById('btn-confirm');
+
+      if (estadoSalvo && estadoSalvo.confirmado) {
+        btnConfirm.disabled = true;
+        exibirFeedbackSalvo(q, estadoSalvo);
+      } else {
+        btnConfirm.disabled = false;
+      }
+
+      atualizarDrawerHighlights();
+    }
+
+    function renderizarMultiplaEscolha(q) {
+      const container = document.getElementById('container-multipla');
+      container.innerHTML = '';
+
+      const estado = respostasUsuario[questaoAtualIndex];
+      const letras = ['A', 'B', 'C', 'D', 'E'];
+
+      q.opcoes.forEach((opcao, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+
+        if (estado && estado.selecionado === index) {
+          btn.classList.add('selected');
+        }
+
+        if (estado && estado.confirmado) {
+          btn.disabled = true;
+          if (index === q.correta) {
+            btn.classList.add('correct');
+          } else if (estado.selecionado === index && !estado.acertou) {
+            btn.classList.add('wrong');
+          }
+        } else {
+          btn.onclick = () => selecionarOpcaoMultipla(index);
+        }
+
+        btn.innerHTML = `
+          <span class="opt-letter">${letras[index]}</span>
+          <span>${opcao}</span>
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    function selecionarOpcaoMultipla(index) {
+      const estado = respostasUsuario[questaoAtualIndex] || {};
+      if (estado.confirmado) return;
+
+      respostasUsuario[questaoAtualIndex] = {
+        selecionado: index,
+        confirmado: false
+      };
+
+      renderizarMultiplaEscolha(questoes[questaoAtualIndex]);
+    }
+
+    function renderizarUnscramble(q) {
+      const targetZone = document.getElementById('target-zone');
+      const wordPool = document.getElementById('word-pool');
+      
+      targetZone.innerHTML = '';
+      wordPool.innerHTML = '';
+
+      const dataFixed = q.palavrasFixed || { embaralhadas: q.palavrasEmbaralhadas };
+      const estado = respostasUsuario[questaoAtualIndex];
+
+      // Se já foi respondido e confirmado
+      if (estado && estado.confirmado) {
+        palavrasSelecionadas = estado.fraseMontada.trim().split(' ');
+      } else if (estado && estado.palavrasMontando) {
+        palavrasSelecionadas = [...estado.palavrasMontando];
+      }
+
+      // Renderizar palavras selecionadas na Target Zone
+      palavrasSelecionadas.forEach((palavra, index) => {
+        if (!palavra) return;
+        const block = document.createElement('div');
+        block.className = 'word-block';
+        block.innerText = palavra;
+        
+        if (!estado || !estado.confirmado) {
+          block.onclick = () => removerPalavra(index);
+        }
+        targetZone.appendChild(block);
+      });
+
+      // Renderizar Pool
+      dataFixed.embaralhadas.forEach((palavra, origIndex) => {
+        const block = document.createElement('div');
+        block.className = 'word-block';
+        block.innerText = palavra;
+
+        // Verificar quantas vezes já foi usada
+        const contagemUsadas = palavrasSelecionadas.filter(p => p === palavra).length;
+        const contagemTotal = dataFixed.embaralhadas.filter(p => p === palavra).length;
+        
+        // Se todas dessa palavra foram usadas
+        const jaUsadoApenasEste = palavrasSelecionadas.indexOf(palavra);
+
+        if (estado && estado.confirmado) {
+          block.classList.add('used');
+        } else {
+          block.onclick = () => adicionarPalavra(palavra, origIndex);
+        }
+
+        wordPool.appendChild(block);
+      });
+    }
+
+    function adicionarPalavra(palavra) {
+      const estado = respostasUsuario[questaoAtualIndex];
+      if (estado && estado.confirmado) return;
+
+      palavrasSelecionadas.push(palavra);
+      respostasUsuario[questaoAtualIndex] = {
+        palavrasMontando: [...palavrasSelecionadas],
+        confirmado: false
+      };
+
+      renderizarUnscramble(questoes[questaoAtualIndex]);
+    }
+
+    function removerPalavra(index) {
+      const estado = respostasUsuario[questaoAtualIndex];
+      if (estado && estado.confirmado) return;
+
+      palavrasSelecionadas.splice(index, 1);
+      respostasUsuario[questaoAtualIndex] = {
+        palavrasMontando: [...palavrasSelecionadas],
+        confirmado: false
+      };
+
+      renderizarUnscramble(questoes[questaoAtualIndex]);
+    }
+
+    function confirmarResposta() {
+      const q = questoes[questaoAtualIndex];
+      let estado = respostasUsuario[questaoAtualIndex];
+
+      if (q.tipo === 'multipla') {
+        if (!estado || estado.selecionado === undefined || estado.selecionado === null) {
+          alert("Por favor, selecione uma opção antes de confirmar!");
+          return;
+        }
+
+        const acertou = estado.selecionado === q.correta;
+        respostasUsuario[questaoAtualIndex] = {
+          ...estado,
+          confirmado: true,
+          acertou: acertou
+        };
+
+        renderizarMultiplaEscolha(q);
+        exibirFeedbackSalvo(q, respostasUsuario[questaoAtualIndex]);
+
+      } else {
+        // Unscramble
+        if (!palavrasSelecionadas || palavrasSelecionadas.length === 0) {
+          alert("Por favor, selecione as palavras para montar a frase antes de confirmar!");
+          return;
+        }
+
+        const dataFixed = q.palavrasFixed || { correta: q.respostaCorreta };
+        const fraseMontada = palavrasSelecionadas.join(' ').trim();
+        const fraseEsperada = dataFixed.correta.trim();
+
+        // Normalização simples de espaços para validação
+        const acertou = fraseMontada.replace(/\s+/g, ' ') === fraseEsperada.replace(/\s+/g, ' ');
+
+        respostasUsuario[questaoAtualIndex] = {
+          fraseMontada: fraseMontada,
+          confirmado: true,
+          acertou: acertou
+        };
+
+        renderizarUnscramble(q);
+        exibirFeedbackSalvo(q, respostasUsuario[questaoAtualIndex]);
+      }
+
+      document.getElementById('btn-confirm').disabled = true;
+      atualizarDrawerHighlights();
+    }
+
+    function exibirFeedbackSalvo(q, estado) {
+      const card = document.getElementById('feedback-card');
+      const statusText = document.getElementById('feedback-status');
+      const descText = document.getElementById('feedback-texto');
+
+      card.classList.remove('escondido', 'correct', 'wrong');
+
+      if (estado.acertou) {
+        card.classList.add('correct');
+        statusText.innerText = "✓ Resposta Correta!";
+        descText.innerHTML = q.justificativa;
+      } else {
+        card.classList.add('wrong');
+        statusText.innerText = "✗ Resposta Incorreta!";
+        
+        if (q.tipo === 'multipla') {
+          const corretaTexto = q.opcoes[q.correta];
+          descText.innerHTML = `<strong>A opção correta é: ${corretaTexto}</strong><br>${q.justificativa}`;
+        } else {
+          const dataFixed = q.palavrasFixed || { correta: q.respostaCorreta };
+          descText.innerHTML = `<strong>A frase correta é: "${dataFixed.correta}"</strong><br>${q.justificativa}`;
+        }
+      }
+    }
+
+    function navegarQuestao(delta) {
+      const novoIndex = questaoAtualIndex + delta;
+      if (novoIndex >= 0 && novoIndex < questoes.length) {
+        questaoAtualIndex = novoIndex;
+        carregarQuestao();
+      } else if (novoIndex >= questoes.length) {
+        finalizarQuiz();
+      }
+    }
+
+    function abrirDrawer() {
+      document.getElementById('drawer-map').classList.add('open');
+    }
+
+    function fecharDrawer() {
+      document.getElementById('drawer-map').classList.remove('open');
+    }
+
+    function gerarGridDrawer() {
+      const grid = document.getElementById('q-grid-map');
+      grid.innerHTML = '';
+
+      questoes.forEach((q, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'q-map-btn';
+        btn.id = `q-map-${index}`;
+        btn.innerText = index + 1;
+        btn.onclick = () => {
+          questaoAtualIndex = index;
+          carregarQuestao();
+          fecharDrawer();
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    function atualizarDrawerHighlights() {
+      questoes.forEach((q, index) => {
+        const btn = document.getElementById(`q-map-${index}`);
+        if (!btn) return;
+
+        btn.className = 'q-map-btn';
+
+        if (index === questaoAtualIndex) {
+          btn.classList.add('current');
+        }
+
+        const estado = respostasUsuario[index];
+        if (estado && estado.confirmado) {
+          if (estado.acertou) {
+            btn.classList.add('status-correct');
+          } else {
+            btn.classList.add('status-wrong');
+          }
+        }
+      });
+    }
+
+    function finalizarQuiz() {
+      document.getElementById('tela-quiz').classList.add('escondido');
+      document.getElementById('tela-resultado').classList.remove('escondido');
+
+      let acertosMultipla = 0;
+      let acertosWill = 0;
+      let acertosGoingTo = 0;
+
+      questoes.forEach((q, index) => {
+        const st = respostasUsuario[index];
+        if (st && st.confirmado && st.acertou) {
+          if (q.tipo === 'multipla') acertosMultipla++;
+          else if (q.tipo === 'unscramble_will') acertosWill++;
+          else if (q.tipo === 'unscramble_goingto') acertosGoingTo++;
+        }
+      });
+
+      const totalAcertos = acertosMultipla + acertosWill + acertosGoingTo;
+      const percentual = Math.round((totalAcertos / 30) * 100);
+
+      // Renderizar Círculo
+      document.getElementById('score-percent').innerText = `${percentual}%`;
+      document.getElementById('score-fraction').innerText = `${totalAcertos} de 30`;
+      
+      const scoreCircle = document.getElementById('score-circle');
+      scoreCircle.style.background = `conic-gradient(var(--detalhe-azul-escuro) ${percentual}%, #E2E8F0 ${percentual}%)`;
+
+      // Atualizar Cards por Seção
+      document.getElementById('stat-multipla').innerText = `${acertosMultipla} / 12`;
+      document.getElementById('stat-will').innerText = `${acertosWill} / 9`;
+      document.getElementById('stat-goingto').innerText = `${acertosGoingTo} / 9`;
+
+      // Gerar Diagnóstico Pedagógico Personalizado
+      const diagContainer = document.getElementById('diagnostico-conteudo');
+      let dicas = [];
+
+      if (acertosMultipla < 8) {
+        dicas.push("<strong>Diferença de Uso (Will vs. Going to):</strong> Revise as expressões que indicam opinião (<em>I think, maybe, I'm sure</em> para WILL) e evidências físicas ou planos agendados (<em>Look at, already decided</em> para BE GOING TO).");
+      }
+
+      if (acertosWill < 6) {
+        dicas.push("<strong>Sintaxe do WILL:</strong> Lembre-se da estrutura básica: Sujeito + will/won't + verbo no infinitivo sem 'to'. Advérbios como <em>probably</em> e <em>never</em> ficam posicionados logo após o 'will'.");
+      }
+
+      if (acertosGoingTo < 6) {
+        dicas.push("<strong>Estrutura do BE GOING TO:</strong> Atenção à conjugação do verbo auxiliar BE (<em>am, is, are</em>) de acordo com o sujeito antes da expressão <em>going to</em>.");
+      }
+
+      if (dicas.length === 0) {
+        diagContainer.innerHTML = `
+          <p style="color: var(--cor-sucesso); font-weight: 600;">Parabéns! Excelente domínio do Simple Future!</p>
+          <p style="color: var(--texto-suave); margin-top: 6px;">Você demonstrou ótima compreensão na distinção entre WILL e BE GOING TO, bem como na construção sintática das frases em inglês.</p>
+        `;
+      } else {
+        let listHTML = '<ul>';
+        dicas.forEach(d => listHTML += `<li style="margin-bottom: 8px; color: var(--texto-suave);">${d}</li>`);
+        listHTML += '</ul>';
+        diagContainer.innerHTML = listHTML;
+      }
+    }
+
+    function reiniciarQuiz() {
+      respostasUsuario = new Array(questoes.length).fill(null);
+      document.getElementById('tela-resultado').classList.add('escondido');
+      document.getElementById('tela-inicio').classList.remove('escondido');
+    }
+  </script>
+</body>
+</html>
